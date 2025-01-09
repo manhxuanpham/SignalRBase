@@ -1,5 +1,18 @@
+using BaseSignalR.Api.Hubs;
+
 var builder = WebApplication.CreateBuilder(args);
 
+var policyName = "defaultCorsPolicy";
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(policyName, builder =>
+    {
+        builder.WithOrigins("https://localhost:4200") // the Angular app url
+            .AllowAnyMethod()
+            .AllowAnyHeader()
+            .AllowCredentials();
+    });
+});
 // Add services to the container.
 
 builder.Services.AddControllers();
@@ -21,5 +34,7 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+app.MapHub<UserHub>("/hubs/user-count");
+
 
 app.Run();
