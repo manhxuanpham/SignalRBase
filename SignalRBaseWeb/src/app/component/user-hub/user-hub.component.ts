@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { UserHubService } from '../Services/user-hub.service';
+import { UserHubService } from '../../Services/user-hub.service';
 
 @Component({
   selector: 'app-user-hub',
